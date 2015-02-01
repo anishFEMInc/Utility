@@ -1,0 +1,20 @@
+Front-End Set-up
+
+Install everything listed in requirement.
+ 
+Then do the following:
+1. redis-server /usr/local/etc/redis.conf  // That sets up the redis server
+2. Go to Frontend and do the following
+
+	i.  	python data/host_main.py --partners=data/hostdata/partners
+//Sets up partner parameters 
+	ii. 	s3cmd get --force s3://frontend-data/keywordmodels.tar.gz
+// get model parameters
+	iii.	sudo tar -xvf keywordmodels.tar.gz 
+	iv.	mv keywordmodels data
+	v. 	python data/keyword_main.py --datafile=data/keywordmodels
+// loads the paramerers into reds server
+	vi. 	python manage.py runserver 8080
+// run the job on server
+3. Then run the test.py - to generate the search results
+
