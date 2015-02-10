@@ -1,6 +1,8 @@
 from mixpanelutils.getData import *
 import keen
 from mixpanelutils.getRaw import *
+from datetime import datetime
+import calendar
 # TODO: make loops to read from a list of clients and timeframes.....
 
 
@@ -14,7 +16,7 @@ keen.write_key="ef3fed154a91cad9130a9d18f233d99d2d5314855e590e97ba70d23a84d8d46d
 #print 'In raw'
 
 start_date='2015-02-01'
-end_date='2015-02-09'
+end_date='2015-02-02'
 
 
 raw = GetRaw(start_date, end_date)
@@ -78,7 +80,7 @@ for data in raw.raw_data:
         else:
             propsnew[p] = props[p]
     propsnew["keen"]={}
-    propsnew["keen"]["timestamp"] = props['time']
+    propsnew["keen"]["timestamp"] = datetime.fromtimestamp(props['time']).isoformat()
     keen.add_event(EVENT_NAME_MAP[event],propsnew)
 
 i=i+1
