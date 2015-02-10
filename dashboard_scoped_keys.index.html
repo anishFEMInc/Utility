@@ -1,0 +1,84 @@
+Last login: Mon Feb  9 12:37:17 on ttys002
+anishs-air:~ anishacharya$ cd Documents/dashboards-gh-pages/layouts/
+anishs-air:layouts anishacharya$ cd hero-thirds/
+anishs-air:hero-thirds anishacharya$ vim index.html 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <hr>
+
+    <p class="small text-muted">Built with &#9829; by <a href="https://keen.io">Keen IO</a></p>
+
+  </div>
+
+  <script src="../../assets/lib/jquery/dist/jquery.min.js"></script>
+  <script src="../../assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="../../assets/lib/holderjs/holder.js"></script>
+  <script>
+    Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
+  </script>
+
+  <script src="../../assets/lib/keen-js/dist/keen.min.js"></script>
+  <script src="../../assets/js/meta.js"></script>
+
+<script>
+
+var client = new Keen({
+  projectId: "54c6fadfc2266c4333d21f84",
+  readKey: "c946fe733df450e549a02ba0cae543d6dbcbd17ce857f1af5bb0fb7fa1289d024cb76cf19f4baaf3ad66f4f4b7390cbe71be780e37c1d47704ae74aaa5af69a8789160b66db5ed4b8704ed9d87e12ef7521e81ee244a3e373c6214283fcf8b91a7e4226757d14dff034d86a2819bfd3a4a6decb9eb60c6e8954d8f2870983cb52d130cf441323fb8839b1c72af8efb6b00003518162b58687c2704f0bfd6ee02c7641f664ce959c65bf18b2019299b4e"});
+
+
+/////This is encrypted keys for Fem-inc.com only
+///// So, if we change the query and put no restrictions (ideally it would pick from all the videos- But due to
+// the encrypted keys it will show only stats of fem-inc.com)
+/// So, the following two Queries work the same way------
+//// ----- Query - 1-------
+Keen.ready(function(){
+  var query = new Keen.Query("count", {
+    eventCollection: "UnitFirstVisible_STAGING",
+    groupBy: "unit_title"
+  });
+  client.draw(query, document.getElementById("views"), {
+    // Custom configuration here
+  });
+});
+
+
+//////Query-2-----------------
+////--------------------------
+Keen.ready(function(){
+  var query = new Keen.Query("count", {
+    eventCollection: "UnitFirstVisible_STAGING",
+    groupBy: "unit_title",
+    filters: [{"property_name":"unit_url","operator":"contains","property_value":"fem-inc.com"}]
+  });
+  client.draw(query, document.getElementById("views"), {
+    // Custom configuration here
+  });
+});
+////////------check my scoped_key.py function to see how to generate scoped keys for this-----
+/// Remove the filters there and replace the newly generated encryption (global -if you remove the filter=== the read key they provide)
+///// and you will see Query -1 gives a pie chart taking into consideration all the domains
+///// Query-2 producing only Query-2 only giving fem-inc.com related stats.
+
+/////author: anish@fem-inc.com 
+</script>
